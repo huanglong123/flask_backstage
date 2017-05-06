@@ -6,8 +6,6 @@ bcrypt = Bcrypt()
 
 db = MongoEngine()
 
-THE_PERMISSIONS_CLASS = ''
-
 
 class Admin(object):
 	def __init__(self, app=None):
@@ -17,10 +15,17 @@ class Admin(object):
 	def init_app(self, app):
 		db.init_app(app)
 		bcrypt.init_app(app)
-		from flask_backstage.mongoengine.views.admin import admin
+		from .views.admin import admin
 		app.register_blueprint(admin, url_prefix='/admin')
-		from flask_backstage.mongoengine.models import Menu
+		from .models import Menu, User
 		from flask_login import current_user
+		admin = User.objects(role=300).first()
+		if not admin:
+			user = User()
+			user.username = 'admin'
+			user.password = bcrypt.generate_password_hash('123456')
+			user.role = 300
+			user.save()
 
 		@app.context_processor
 		def menus_list():
@@ -32,7 +37,7 @@ class Admin(object):
 				roots = Menu.objects(father='无').order_by('sort')
 				menus = []
 				for r in roots:
-					accessible = current_user.get_field(r.role_name) in r.permissions
+					accessible = current_user.role in r.permissions
 					if accessible:
 						menus.append({'my': r, 'child': build_child_list(r)})
 					else:
@@ -46,7 +51,7 @@ class Admin(object):
 			if childs:
 				menus = []
 				for c in childs:
-					accessible = current_user.get_field(c.role_name) in c.permissions
+					accessible = current_user.role in c.permissions
 					if accessible:
 						menus.append({'my': c, 'child': build_child_list(c)})
 					else:
