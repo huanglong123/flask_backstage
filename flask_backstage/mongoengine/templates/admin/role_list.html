@@ -1,0 +1,61 @@
+{# 头部定义 #}
+{%- extends "frontend/admin_layout.html" -%}
+{% block title %}看店宝{% endblock %}
+{% block keywords %}看店宝{% endblock %}
+{%- block description -%}看店宝{%- endblock -%}
+
+{# 内容部分定义 ,将content部分内容替换成自己的内容,<head>\<body>\</html> 已经在layout.html里面,不需要在这里写了#}
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable middle">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="pull-left header"><i class="fa fa-inbox"></i> 角色列表：</li>
+                        </ul>
+                        <br>
+                        <a class="btn btn-primary btn-sm" href="{{ url_for('xadmin.role_add') }}">添加角色</a>
+                        <div class="tab-content no-padding">
+                            <div style="position: relative; height: auto;">
+                                <div class="box-body">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>角色名</th>
+                                            <th>角色值</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for r in roles %}
+                                            <tr>
+                                                <td width="2%">{{ loop.index }}</td>
+                                                <td width="5%">{% if r.name %}{{ r.name }}{% else %}-{% endif %}</td>
+                                                <td width="5%">{% if r.value %}{{ r.value }}{% else %}-{% endif %}</td>
+                                                <td width="10%">
+                                                    <a href="{{ url_for('xadmin.role_edit', rid=r.id) }}">编辑</a> |
+                                                    <a href="{{ url_for('xadmin.role_del', rid=r.id) }}" class="del">删除</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="9">未查询到该记录!</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

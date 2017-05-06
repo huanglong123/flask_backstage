@@ -1,0 +1,72 @@
+{%- extends "frontend/admin_layout.html" -%}
+{%- from "xadmin/_macros.html" import form_js with context -%}
+
+{% block content %}
+    <style type="text/css">
+        a:link {
+            color: #585858;
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #585858;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #A4A4A4;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #A4A4A4;
+        }
+    </style>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable middle">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">保存{{ name }}</h3>
+                        </div>
+                        <form class="form-horizontal" method="post" action="{{ edit_url }}?id={{ id }}">
+                            <div class="box-body">
+                                {% if form.hidden_tag is defined %}
+                                    {{ form.hidden_tag() }}
+                                {% else %}
+                                    {% if csrf_token %}
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                    {% endif %}
+                                    {% for f in form if f.widget.input_type == 'hidden' %}
+                                        {{ f }}
+                                    {% endfor %}
+                                {% endif %}
+                                {% for f in form if f.widget.input_type != 'hidden' %}
+                                    {% if column_labels %}
+                                    <label>{{ column_labels.get(f.label.text) }}</label>
+                                    {% else %}
+                                        <label>{{ f.label.text }}</label>
+                                    {% endif %}
+                                    {{ f(class="text form-control") }}
+                                {% endfor %}
+                            </div>
+                            <div class="box-footer">
+                                <input class="btn btn-primary" type="submit" name="submit" value="保存{{ name }}">
+                            </div>
+                        </form>
+                    </div>
+
+                </section>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block js %}
+    {{ form_js(form) }}
+{% endblock %}

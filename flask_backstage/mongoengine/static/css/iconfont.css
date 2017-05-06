@@ -1,0 +1,48 @@
+/* 阿里巴巴字体图标库 */
+@font-face {
+  font-family: 'iconfont';  /* project id 209099 */
+  src: url('https://at.alicdn.com/t/font_1q8zrohje64j9k9.eot');
+  src: url('https://at.alicdn.com/t/font_1q8zrohje64j9k9.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_1q8zrohje64j9k9.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_1q8zrohje64j9k9.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_1q8zrohje64j9k9.svg#iconfont') format('svg');
+}
+
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'iconfont-user';  /* project id 209099 */
+  src: url('https://at.alicdn.com/t/font_jt5n94smwqwr8uxr.eot');
+  src: url('https://at.alicdn.com/t/font_jt5n94smwqwr8uxr.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_jt5n94smwqwr8uxr.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_jt5n94smwqwr8uxr.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_jt5n94smwqwr8uxr.svg#iconfont') format('svg');
+}
+.iconfont-user{
+    font-family:"iconfont-user" !important;
+    font-size:80px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: 'iconfont-qq';  /* project id 209099 */
+  src: url('https://at.alicdn.com/t/font_afjx9dso9loywrk9.eot');
+  src: url('https://at.alicdn.com/t/font_afjx9dso9loywrk9.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_afjx9dso9loywrk9.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_afjx9dso9loywrk9.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_afjx9dso9loywrk9.svg#iconfont') format('svg');
+}
+.iconfont-qq{
+    font-family:"iconfont-qq" !important;
+    font-size:27px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}

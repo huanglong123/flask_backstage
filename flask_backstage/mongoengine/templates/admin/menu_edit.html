@@ -1,0 +1,105 @@
+{%- extends "frontend/admin_layout.html" -%}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/select2.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/select2-bootstrap.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/typography.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/textfield.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/pmd-select2.css') }}" type="text/css">
+{% endblock %}
+
+{% block content %}
+	<style type="text/css">
+		a:link {
+			color: #585858;
+			text-decoration: none;
+		}
+		a:visited {
+			text-decoration: none;
+			color: #585858;
+		}
+		a:hover {
+			text-decoration: none;
+			color: #A4A4A4;
+		}
+		a:active {
+			text-decoration: none;
+			color: #A4A4A4;
+		}
+	</style>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Main content -->
+		<section class="content">
+			<!-- Main row -->
+			<div class="row">
+				<!-- Left col -->
+				<section class="col-lg-12 connectedSortable middle">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">编辑菜单</h3>
+						</div>
+						<form class="form" method="post" action="{{ url_for('xadmin.menu_editsave') }}">
+							<div>
+								{{ form.hidden_tag() }}
+                                <input name="mid" type="hidden" value="{{ menu.id }}">
+                                {{ form.name.label }}
+								{{ form.name(class="text form-control") }}<br>
+                                {{ form.role_name.label }}
+								{{ form.role_name(class="text form-control") }}<br>
+                                {{ form.father.label }}
+								{{ form.father(class="text form-control") }}<br>
+                                {{ form.url.label }}
+								{{ form.url(class="text form-control") }}<br>
+                                {{ form.permissions.label }}
+								<select class="select-add-tags form-control pmd-select2-tags" multiple>
+                                    {% for k, v in form.permissions.choices %}
+                                        <option value="{{ v }}">{{ k }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="hidden" value="{{ permissions }}" name="permissions" id="permissions">
+                                {{ form.sort.label }}
+								{{ form.sort(class="text form-control") }}<br>
+
+							</div>
+							<div class="box-footer">
+								<input class="btn btn-primary" type="submit" name="submit" value="保存菜单">
+							</div>
+						</form>
+					</div>
+				</section>
+			</div>
+		</section>
+	</div>
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('xfe.static', filename='js/textfield.js') }}"></script>
+    <script src="{{ url_for('xfe.static', filename='js/select2.full.js') }}"></script>
+    <script src="{{ url_for('xfe.static', filename='js/pmd-select2.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var permissions = $(".select-add-tags").select2({
+                tags: true,
+                theme: "bootstrap"
+            });
+            permissions.val({{ menu.permissions }}).trigger("change");
+        });
+        $(document).ready(function () {
+            $(".select-add-tags").change(
+                    function () {
+                        var permissions = $(".select2-selection__rendered").children(".select2-selection__choice");
+                        var pvalue = "";
+                        if (permissions) {
+                            for (var i = 0, len = permissions.length; i < len; i++) {
+                                $(".select-add-tags option").map(function () {
+                                    if ($(this).text() == $(permissions[i]).attr("title")) {
+                                        pvalue = pvalue + $(this).val() + ",";
+                                    }
+                                })
+                            }
+                            $("#permissions").val(pvalue)
+                        }
+                    }
+            )
+        });
+    </script>
+{% endblock %}

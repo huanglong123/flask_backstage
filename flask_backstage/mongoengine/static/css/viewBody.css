@@ -1,0 +1,106 @@
+.content-wrapper{
+    min-height: 100%;
+    /*background-color: #F7F6F2;*/
+    z-index: 1;
+}
+.content-wrapper .content{
+    min-height: 250px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.content-wrapper .nav-tabs-custom{
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+.nav-tabs-custom > .nav-tabs > li.header{
+    float: left;
+    line-height: 35px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #444;
+}
+.nav-tabs-custom > .tab-content{
+    background: #fff;
+    padding: 10px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.box.box-primary {
+    border-top-color: #009ad1;
+}
+
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+.box-header .box-title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1;
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+}
+.box-body table thead{
+    background: #f5f5f5;
+}
+.box-body table thead th{
+    border-bottom: none;
+}
+.box-footer {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 1px solid #f4f4f4;
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+.box-body span{
+    margin-bottom: 20px;
+    display: block;
+}
+.box-body a{
+    margin-bottom: 20px;
+}
+#frontimage{
+    margin-bottom: 20px;
+}
+.viewFramework-sidebar-full .wangEditor-fullscreen{
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 180px;
+    right: 0;
+}
+.viewFramework-sidebar-mini .wangEditor-fullscreen{
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 50px;
+    right: 0;
+}

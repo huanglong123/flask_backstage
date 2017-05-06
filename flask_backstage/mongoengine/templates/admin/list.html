@@ -1,0 +1,92 @@
+{# 头部定义 #}
+{%- extends "frontend/admin_layout.html" -%}
+{% block title %}看店宝{% endblock %}
+{% block keywords %}看店宝{% endblock %}
+{%- block description -%}看店宝{%- endblock -%}
+
+{# 内容部分定义 ,将content部分内容替换成自己的内容,
+<head>\
+<body>\</html> 已经在layout.html里面,不需要在这里写了#}
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-12 connectedSortable middle">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="pull-left header"><i class="fa fa-inbox"></i> {{ name }}列表：</li>
+                        </ul>
+                        <br>
+                        {% if can_create %}
+                            <a class="btn btn-primary btn-sm" href="{{ url_prefix }}/create/">添加{{ name }}</a>
+                        {% endif %}
+                        <div class="tab-content no-padding">
+                            <div style="position: relative; height: auto;">
+                                <div class="box-body">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            {% if column_labels %}
+                                                {% for k, v in fields %}
+                                                    {% if k != "id" %}
+                                                        <th>{{ column_labels.get(k) }}</th>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                {% for k, v in fields %}
+                                                    {% if k != "id" %}
+                                                        <th>{{ k }}</th>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for d in data.items %}
+                                            <tr>
+                                                <td width="2%">{{ loop.index }}</td>
+                                                {% for k, v in fields %}
+                                                    {% if k != "id" %}
+                                                        {% if get_field_value(d, k) == None %}
+                                                            <td>-</td>
+                                                        {% else %}
+                                                            {% if k in image_list %}
+                                                                <td><img width="50%" height="50%" src="{{ url_for('oss.static', filename=get_field_value(d, k)) }}" class="img-rounded"/></td>
+                                                            {% else %}
+                                                                <td>{{ get_field_value(d, k) }}</td>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <td width="10%">
+                                                    {% if can_edit %}
+                                                        <a href="{{ url_prefix }}/edit/?id={{ d.id }}">编辑</a> |
+                                                    {% endif %}
+                                                    {% if can_delete %}
+                                                        <a href="{{ url_prefix }}/delete/?id={{ d.id }}" class="del">删除</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="9">未查询到该记录!</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+
+{% endblock %}
