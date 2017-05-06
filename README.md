@@ -1,2 +1,2 @@
-# flask-Backstage
-Rapid development Backstage framework with flask and AdminLTE
+# flask-backstage
+Rapid development backstage framework with flask and AdminLTE
