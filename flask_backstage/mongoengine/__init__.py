@@ -18,6 +18,16 @@ class Admin(object):
 		from .views.admin import admin
 		app.register_blueprint(admin, url_prefix='/admin')
 		from .models import Menu, User
+		from flask_login import LoginManager
+		login_manager = LoginManager()
+		login_manager.init_app(app)  # 用于用户的登录，登出和登录访问控制
+
+		login_manager.login_view = "admin.login"
+
+		@login_manager.user_loader
+		def load_user(user_id):
+			return User.objects(id=user_id).first()
+
 		from flask_login import current_user
 		admin = User.objects(role=300).first()
 		if not admin:

@@ -1,10 +1,10 @@
 {%- extends "admin/layout.html" -%}
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/select2.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/select2-bootstrap.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/typography.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/textfield.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xfe.static', filename='css/pmd-select2.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/select2-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/textfield.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/pmd-select2.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -41,7 +41,7 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">添加菜单</h3>
                         </div>
-                        <form class="form-horizontal" method="post" action="{{ url_for('xadmin.menu_save') }}">
+                        <form class="form-horizontal" method="post" action="{{ url_for('admin.menu_save') }}">
                             <div>
                                 {{ form.hidden_tag() }}
                                 {{ form.name.label }}
@@ -74,9 +74,9 @@
     </div>
 {% endblock %}
 {% block js %}
-    <script src="{{ url_for('xfe.static', filename='js/textfield.js') }}"></script>
-    <script src="{{ url_for('xfe.static', filename='js/select2.full.js') }}"></script>
-    <script src="{{ url_for('xfe.static', filename='js/pmd-select2.js') }}"></script>
+    <script src="{{ url_for('admin.static', filename='js/textfield.js') }}"></script>
+    <script src="{{ url_for('admin.static', filename='js/select2.full.js') }}"></script>
+    <script src="{{ url_for('admin.static', filename='js/pmd-select2.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(".select-add-tags").select2({

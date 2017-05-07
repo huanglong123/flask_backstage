@@ -5,262 +5,83 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <meta name="keywords" cntent="{% block keywords %}{% endblock %}"/>
-    <meta name="description" content="{% block description %}{% endblock %}"/>
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-    <link rel="shortcut icon" href="{{ url_for('xadmin.static', filename='favicon.ico') }}" type="image/x-icon"/>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="{{ url_for('cdn.static', filename='bootstrap/3.3.6/css/bootstrap.min.css') }}" type="text/css">
-    <!-- 日期选择器 -->
-    <link rel="stylesheet" href="{{ url_for('cdn.static', filename='smalot-bootstrap-datetimepicker/2.3.11/css/bootstrap-datetimepicker.min.css') }}" type="text/css">
-    <!-- dataTables -->
-    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ url_for('cdn.static', filename='font-awesome/4.5.0/css/font-awesome.min.css') }}" type="text/css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ url_for('cdn.static', filename='ionicons/2.0.1/css/ionicons.min.css') }}" type="text/css">
-    <!-- wangeditor -->
-    <link rel="stylesheet" href="{{ url_for('cdn.static', filename='wangeditor/2.1.20/css/wangEditor.min.css') }}" type="text/css">
-    <!-- 自定义css -->
-    <link rel="stylesheet" href="{{ url_for('xadmin.static', filename='css/hint.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xadmin.static', filename='css/iconfont.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xadmin.static', filename='css/common.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('xadmin.static', filename='css/viewBody.css') }}" type="text/css">
-    {%- block css -%}{% endblock %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Flask_Backstage</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/bootstrap.min.css') }}">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/AdminLTE.min.css') }}">
+	{%- block css -%}{% endblock %}
 </head>
 
-<body style="background: #F7F6F2;">
-{% block nav %}
-<!-- 顶部标题栏开始 -->
-<div class="viewFramework-topbar">
-    <div class="console-component-topbar">
-        <div class="topbar-warp topbar-clearfix">
-            <div class="topbar-head topbar-left">
-                <a class="topbar-btn topbar-logo topbar-left" href="#">
-                    <img src="{{ url_for('xadmin.static', filename='images/dzt_logo.png') }}"/>
-                </a>
-                <a href="#" class="topbar-home-link topbar-btn topbar-left">
-                    <span class="ng-binding">管理控制台</span>
-                </a>
-            </div>
-            <div class="topbar-product topbar-left">
-                <div class="topbar-btn topbar-product-btn">
-                    <span class="ng-binding">产品与服务</span>
-                    <span class="icon-arrow-down caret "></span>
-                </div>
-                <div class="topbar-product-dropdown">
-                    <div class="topbar-product-container">
-                        <div class="content"></div>
-                        <div class="topbar-product-close">
-                            <span class="caret" style="transform: rotate(180deg);"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="topbar-info topbar-right topbar-clearfix">
-                <div class="topbar-search topbar-left topbar-info-dropdown ng-scope">
-                    <a href="#" class="topbar-btn topbar-hover-dark">
-                        <span class="icon-search glyphicon glyphicon-search"></span>
-                        <span class="ng-binding">搜索</span>
-                    </a>
-                    <div class="topbar-search-dropdown topbar-info-dropdown-menu">
-                        <input class="topbar-search-ask ng-pristine ng-valid" type="text" name="input" ng-mokel="askInput" autocomplete="off" placeholder="搜索">
-                        <a class="topbar-search-mark icon-enter glyphicon glyphicon-search" href="#"></a>
-                    </div>
-                </div>
-                <div class="dropdown topbar-notice topbar-left topbar-info-dropdown topbar-info-item ng-scope">
-                    <a href="#" class="topbar-btn topbar-btn-notice topbar-hover-dark">
-                        <span class="topbar-btn-notice-icon glyphicon glyphicon-bell"></span>
-                        <span class="topbar-btn-notice-num ng-binding topbar-btn-notice-num-zero">0</span>
-                    </a>
-                    <div class="topbar-notice-panel topbar-info-dropdown-menu">
-                        <div class="topbar-notice-arrow"></div>
-                        <div class="topbar-notice-head">
-                            <span class="ng-binding">站内消息通知</span>
-                            <a href="#" class="ng-binding pull-right" style="font-size: 13px;">消息接收管理</a>
-                        </div>
-                        <div class="topbar-notice-body">
-                            <p class="topbar-notice-empty ng-scope ng-binding">您暂时没有公告消息</p>
-                        </div>
-                        <div class="topbar-notice-foot">
-                            <a href="#" class="topbar-notice-more ng-binding">查看更多</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="dropdown topbar-left topbar-info-item topbar-info-dropdown ng-scope">
-                    <a href="#" class="topbar-btn dropdown-toggle" role="menuitem" data-toggle="dropdown">
-                        <span class="ng-binding">信息</span>
-                    </a>
-                    <ul class="topbar-info-dropdown-menu topbar-info-dropdown-menu-list dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li class="topbar-info-btn ng-scope" role="presentation">
-                            <a href="#" target="_blank" role=menuitem>
-                                <sapn class="ng-binding">充值</sapn>
-                            </a>
-                        </li>
-                        <li class="topbar-info-btn ng-scope" role="presentation">
-                            <a href="#" target="_blank" role=menuitem>
-                                <sapn class="ng-binding">充值</sapn>
-                            </a>
-                        </li>
-                        <li class="topbar-info-btn ng-scope" role="presentation">
-                            <a href="#" target="_blank" role=menuitem>
-                                <sapn class="ng-binding">充值</sapn>
-                            </a>
-                        </li>
-                        <li class="topbar-info-btn ng-scope" role="presentation">
-                            <a href="#" target="_blank" role=menuitem>
-                                <sapn class="ng-binding">充值</sapn>
-                            </a>
-                        </li>
-                        <li class="topbar-info-btn ng-scope divider" role=presentation></li>
-                        <li class="topbar-info-btn ng-scope" role="presentation">
-                            <a href="#" target="_blank" role=menuitem>
-                                <sapn class="ng-binding">充值</sapn>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dropdown topbar-left topbar-info-item topbar-info-dropdown ng-scope topbar-user">
-                    <a href="#" class="topbar-btn dropdown-toggle" role="menuitem" id="dropdownMenu1" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <span class="ng-binding">个人中心</span>
-                    </a>
-                    <div class="topbar-info-dropdown-menu topbar-info-dropdown-menu-list dropdown-menu topbar-align-right" role="menu"
-                         aria-labelledby="dropdownMenu1">
-                        <div class="topbar-user-entrance-list">
-                            <a href="#" class="topbar-user-entrance ng-scope">
-                                <span class="topbar-user-entrance-logo icon-topbar-user-info glyphicon glyphicon-list-alt"></span>
-                                <span class="ng-binding">基本资料</span>
-                            </a>
-                            <a href="#" class="topbar-user-entrance ng-scope">
-                                <span class="topbar-user-entrance-logo icon-topbar-user-info glyphicon glyphicon-envelope"></span>
-                                <span class="ng-binding">基本资料</span>
-                            </a>
-                            <a href="#" class="topbar-user-entrance ng-scope">
-                                <span class="topbar-user-entrance-logo icon-topbar-user-info glyphicon glyphicon-envelope"></span>
-                                <span class="ng-binding">基本资料</span>
-                            </a>
-                            <a href="#" class="topbar-user-entrance ng-scope">
-                                <span class="topbar-user-entrance-logo icon-topbar-user-info glyphicon glyphicon-envelope"></span>
-                                <span class="ng-binding">基本资料</span>
-                            </a>
-                            <a href="#" class="topbar-user-entrance ng-scope">
-                                <span class="topbar-user-entrance-logo icon-topbar-user-info glyphicon glyphicon-envelope"></span>
-                                <span class="ng-binding">基本资料</span>
-                            </a>
-                            <a href="#" class="topbar-user-entrance ng-scope">
-                                <span class="topbar-user-entrance-logo icon-topbar-user-info glyphicon glyphicon-envelope"></span>
-                                <span class="ng-binding">基本资料</span>
-                            </a>
-                        </div>
-                        <div>
-                            <div class="user-btn-list">
-                                <a href="{{ url_for('kuser.login_out') }}" class="user-btn-link" target="_self">
-                                    <span class="ng-binding">退出控制台</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 顶部标题栏结束 -->
-{% endblock %}
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+	{% block header %}
+	<!-- 顶部标题栏开始 -->
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="#" class="logo">
+			<span class="logo-lg"><b>Admin</b>LTE</span>
+		</a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+					<!-- User Account: style can be found in dropdown.less -->
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="hidden-xs">Alexander Pierce</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" class="btn btn-default">Sign out</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- 顶部标题栏结束 -->
+	{% endblock %}
 
-<!-- 主体内容开始 -->
+	<!-- 侧边栏 -->
+	{% block aside %}
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<ul class="sidebar-menu">
+				<li class="active treeview">
+					<a href="#">
+						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+						<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+					</a>
+					<ul class="treeview-menu">
+						<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+						<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+	</aside>
+	<!-- 侧边栏结束 -->
+	{% endblock %}
 
-<div class="viewFramework-body viewFramework-sidebar-full">
-    <!-- 左侧树形导航栏开始 -->
-    <div class="viewFramework-sidebar ng-scope">
-        <div class="sidebar-content ng-scope console-component-sidebar">
-            <div class="ng-scope">
-                <div class="sidebar-inner ng-scope">
-                    <div class="sidebar-fold icon-fold">
-                        <span class="glyphicon glyphicon-align-justify"></span>
-                    </div>
-                    {% if current_user.role == 300 %}
-                        <a href="{{ url_for('xadmin.menu_list') }}">
-                            <div class="sidebar-nav ng-scope sidebar-nav-active">
-                                <div class="sidebar-title sidebar-trans ng-scope hint--right" data-hint="菜单管理">
-                                    <div class="sidebar-title-inner">
-                                        <span class="sidebar-title-icon glyphicon glyphicon-tasks"></span>
-                                        <span class="sidebar-title-text ng-binding">菜单管理</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="{{ url_for('xadmin.role_list') }}">
-                            <div class="sidebar-nav ng-scope sidebar-nav-active">
-                                <div class="sidebar-title sidebar-trans ng-scope hint--right" data-hint="角色管理">
-                                    <div class="sidebar-title-inner">
-                                        <span class="sidebar-title-icon glyphicon glyphicon-tasks"></span>
-                                        <span class="sidebar-title-text ng-binding">角色管理</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    {% endif %}
 
-                    {#二级菜单#}
-                    {% for m in menus_list %}
-
-                    <div class="sidebar-nav ng-scope sidebar-nav-active">
-                        <a href="{% if m.child %}#{% else %}{{ m.my.url | safe }}{% endif %}">
-                            <div class="sidebar-title sidebar-trans ng-scope hint--right" data-hint="{{ m.my.name }}">
-                                <div class="sidebar-title-inner">
-                                    <span class="sidebar-title-icon caret"></span>
-                                    <span class="sidebar-title-text ng-binding">{{ m.my.name }}</span>
-                                </div>
-                            </div>
-                        </a>
-                        {% if m.child %}
-                        <ul class="sidebar-trans">
-                            {% for c in m.child %}
-                            <li class="nav-item ng-scope active hint--right" data-hint="{{ c.my.name }}">
-                                <a href="{% if c.child %}#{% else %}{{ c.my.url | safe }}{% endif %}" class="sidebar-trans ng-scope">
-                                    <div class="nav-icon sidebar-trans">
-                                        <span class="icon-ecs glyphicon glyphicon-tasks"></span>
-                                    </div>
-                                    <span class="nav-title ng-binding">{{ c.my.name }}</span>
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    {% block menus_tree %}
-    {% endblock %}
-
-    {#中间自定义内容区域#}
-    {% block content %}{% endblock %}
+	{#中间自定义内容区域#}
+	{% block content %}{% endblock %}
 </div>
 
 <!-- 主体内容结束 -->
 
-<script src="{{ url_for('cdn.static', filename='jquery/2.1.0/jquery.min.js') }}"></script>
-<script src="{{ url_for('cdn.static', filename='bootstrap/3.3.6/js/bootstrap.min.js') }}"></script>
-<!-- 日期选择器 -->
-<script src="{{ url_for('cdn.static', filename='smalot-bootstrap-datetimepicker/2.3.11/js/bootstrap-datetimepicker.min.js') }}"></script>
-<script src="{{ url_for('cdn.static', filename='smalot-bootstrap-datetimepicker/2.3.11/js/locales/bootstrap-datetimepicker.zh-CN.js') }}"></script>
-<!-- dataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
-<!-- wangeditor -->
-<script src="{{ url_for('cdn.static', filename='wangeditor/2.1.20/js/wangEditor.min.js') }}"></script>
-<!-- 自定义js -->
-<script type="text/javascript" src="{{ url_for('xfe.static', filename='js/useEditor.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('xfe.static', filename='js/imageUpload.js') }}"></script>
-<!--<script type="text/javascript" src="{{ url_for('xadmin.static', filename='js/popup.js') }}"></script>-->
-<script type="text/javascript" src="{{ url_for('xadmin.static', filename='js/common.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<script src="{{ url_for('admin.static', filename='js/jquery-2.2.3.min.js') }}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{ url_for('admin.static', filename='js/bootstrap.min.js') }}"></script>
 {%- block js -%}{%- endblock -%}
 </body>
 

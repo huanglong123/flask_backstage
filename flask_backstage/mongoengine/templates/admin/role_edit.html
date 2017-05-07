@@ -31,7 +31,7 @@
 						<div class="box-header with-border">
 							<h3 class="box-title">编辑角色</h3>
 						</div>
-						<form class="form" method="post" action="{{ url_for('xadmin.role_editsave') }}">
+						<form class="form" method="post" action="{{ url_for('admin.role_editsave') }}">
 							<div class="box-body">
 								{{ form.hidden_tag() }}
                                 <input name="rid" type="hidden" value="{{ role.id }}">

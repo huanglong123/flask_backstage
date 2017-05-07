@@ -21,8 +21,7 @@ admin_required = admin_create_required(300)
 
 
 
-@admin.route('/login/', methods=('GET', 'POST'))
-@login_required
+@admin.route('/', methods=('GET', 'POST'))
 def login():
 	"""
 	登录

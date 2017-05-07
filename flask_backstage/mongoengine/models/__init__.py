@@ -6,6 +6,7 @@
 
 from mongoengine import *
 from flask_backstage.mongoengine import db
+from flask_login import UserMixin
 
 
 class Menu(db.Document):
@@ -35,7 +36,7 @@ class Role(db.Document):
 	name = StringField(required=True)
 	value = IntField(required=True)
 
-class User(db.DynamicDocument):
+class User(db.DynamicDocument, UserMixin):
 	username = StringField(required=True)
 	password = BinaryField(required=True)
 	role = IntField(required=True)
