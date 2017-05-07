@@ -13,6 +13,10 @@
 	<!-- Bootstrap 3.3.6 -->
 	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/bootstrap.min.css') }}">
 
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/AdminLTE.min.css') }}">
 	{%- block css -%}{% endblock %}
@@ -21,55 +25,55 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	{% block header %}
-	<!-- 顶部标题栏开始 -->
-	<header class="main-header">
-		<!-- Logo -->
-		<a href="#" class="logo">
-			<span class="logo-lg"><b>Admin</b>LTE</span>
-		</a>
-		<!-- Header Navbar: style can be found in header.less -->
-		<nav class="navbar navbar-static-top">
-			<div class="navbar-custom-menu">
-				<ul class="nav navbar-nav">
-					<!-- User Account: style can be found in dropdown.less -->
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<span class="hidden-xs">Alexander Pierce</span>
-						</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="#" class="btn btn-default">Sign out</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<!-- 顶部标题栏结束 -->
+		<!-- 顶部标题栏开始 -->
+		<header class="main-header">
+			<!-- Logo -->
+			<a href="#" class="logo">
+				<span class="logo-lg"><b>Admin</b>LTE</span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top">
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span class="hidden-xs">Alexander Pierce</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#" class="btn btn-default">Sign out</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<!-- 顶部标题栏结束 -->
 	{% endblock %}
 
 	<!-- 侧边栏 -->
 	{% block aside %}
-	<aside class="main-sidebar">
-		<section class="sidebar">
-			<ul class="sidebar-menu">
-				<li class="active treeview">
-					<a href="#">
-						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
-						<span class="pull-right-container">
+		<aside class="main-sidebar">
+			<section class="sidebar">
+				<ul class="sidebar-menu">
+					<li class="active treeview">
+						<a href="#">
+							<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+							<span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-					</a>
-					<ul class="treeview-menu">
-						<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-						<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-					</ul>
-				</li>
-			</ul>
-		</section>
-	</aside>
-	<!-- 侧边栏结束 -->
+						</a>
+						<ul class="treeview-menu">
+							<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+							<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</aside>
+		<!-- 侧边栏结束 -->
 	{% endblock %}
 
 

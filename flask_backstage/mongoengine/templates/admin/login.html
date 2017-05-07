@@ -1,1 +1,54 @@
-{%- extends "admin/layout.html" -%}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Flask_Backstage</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/bootstrap.min.css') }}">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/AdminLTE.min.css') }}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+	<div class="login-logo">
+		<a href="#"><b>Flask</b>Backstage</a>
+	</div>
+	<!-- /.login-logo -->
+	<div class="login-box-body">
+		<p class="login-box-msg">登录页面</p>
+
+		<form action="{{ url_for('admin.login') }}" method="post">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+			<div class="form-group has-feedback">
+				<input class="form-control" placeholder="用户名" name="username">
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" class="form-control" placeholder="密码" name="password">
+			</div>
+			<div class="row">
+				<!-- /.col -->
+				<div class="col-xs-12">
+					<button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+				</div>
+				<!-- /.col -->
+			</div>
+		</form>
+	</div>
+	<!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<script src="{{ url_for('admin.static', filename='js/jquery-2.2.3.min.js') }}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{{ url_for('admin.static', filename='js/bootstrap.min.js') }}"></script>
+
+</body>
+</html>

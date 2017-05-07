@@ -22,6 +22,7 @@ class RoleForm(FlaskForm):
 	name = StringField('角色名')
 	value = IntegerField('值')
 
+
 class LoginForm(FlaskForm):
 	username = StringField('用户名')
 	password = PasswordField('密码')
@@ -30,7 +31,7 @@ class LoginForm(FlaskForm):
 		user = User.objects(username=self.username.data).first()
 		return user
 
-	def validate_password(self):
+	def validate_password(self, field):
 		user = self.get_user()
 		if user:
 			if not user.password:
