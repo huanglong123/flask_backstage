@@ -66,7 +66,7 @@ def menu_add():
 	:return:
 	"""
 	form = MenuForm()
-	menus = Menu.objects(father='无')
+	menus = Menu.objects
 	roles = Role.objects
 	form.father.choices = [('无', '无')] + [(m.name, m.name) for m in menus]
 	form.permissions.choices = [('默认权限', 0)] + [(r.name, r.value) for r in roles]
@@ -103,10 +103,9 @@ def menu_edit(mid):
 	menu = Menu.objects(id=mid).first()
 	roles = Role.objects
 	form = MenuForm()
-	menus = Menu.objects(father='无')
+	menus = Menu.objects
 	form.father.choices = [('无', '无')] + [(m.name, m.name) for m in menus]
 	form.name.data = menu.name
-	form.role_name.data = menu.role_name
 	form.father.data = menu.father
 	form.url.data = menu.url
 	form.permissions.choices = [('默认权限', 0)] + [(r.name, r.value) for r in roles]

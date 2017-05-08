@@ -11,7 +11,6 @@ from .. import bcrypt
 
 class MenuForm(FlaskForm):
 	name = StringField('菜单名')
-	role_name = StringField('角色字段名')
 	father = SelectField('父级菜单')
 	url = StringField('菜单地址')
 	permissions = SelectField('菜单权限限制')

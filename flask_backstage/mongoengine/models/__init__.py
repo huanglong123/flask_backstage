@@ -20,7 +20,6 @@ class Menu(db.Document):
 	:cvar sort 菜单排序
 	"""
 	name = StringField(required=True, unique=True)
-	role_name = StringField()
 	father = StringField()
 	url = StringField()
 	permissions = ListField()
