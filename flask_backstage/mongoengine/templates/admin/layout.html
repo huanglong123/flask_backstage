@@ -1,6 +1,4 @@
-{%- from "admin/_macros.html" import foot with context -%}
 {%- from "admin/_macros.html" import menus_tree with context -%}
-{%- from "admin/_macros.html" import menus_tree_third_stage with context -%}
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -19,6 +17,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/AdminLTE.min.css') }}">
+
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/skin-blue.min.css') }}">
+
 	{%- block css -%}{% endblock %}
 </head>
 
@@ -29,10 +30,14 @@
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="#" class="logo">
+				<span class="logo-mini"><b>A</b>LT</span>
 				<span class="logo-lg"><b>Admin</b>LTE</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
+				<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+					<span class="sr-only">Toggle navigation</span>
+				</a>
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- User Account: style can be found in dropdown.less -->
@@ -55,10 +60,10 @@
 
 	<!-- 侧边栏 -->
 	{% block aside %}
-		<aside class="main-sidebar">
-			<section class="sidebar">
-				<ul class="sidebar-menu">
-					{% if current_user.role == 300 %}
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<ul class="sidebar-menu">
+				{% if current_user.role == 300 %}
 					<li class="treeview">
 						<a href="{{ url_for('admin.menu_list') }}">
 							<i class="fa fa-dashboard"></i> <span>菜单管理</span>
@@ -71,21 +76,24 @@
 							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 						</a>
 					</li>
-					{% endif %}
-					<li class="active treeview">
-						<a href="#">
-							<i class="fa fa-dashboard"></i> <span>Dashboard</span>
-							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-						</a>
+				{% endif %}
+				{% for m in menus_list %}
+				<li class="active treeview">
+					<a href="{% if m.child %}#{% else %}{{ m.my.url | safe }}{% endif %}">
+						<i class="fa fa-dashboard"></i> <span>{{ m.my.name }}</span>
+						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+					</a>
+					{% if m.child %}
 						<ul class="treeview-menu">
-							<li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-							<li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+							{{ menus_tree(m.child) }}
 						</ul>
-					</li>
-				</ul>
-			</section>
-		</aside>
-		<!-- 侧边栏结束 -->
+					{% endif %}
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+	</aside>
+	<!-- 侧边栏结束 -->
 	{% endblock %}
 
 
@@ -98,6 +106,7 @@
 <script src="{{ url_for('admin.static', filename='js/jquery-2.2.3.min.js') }}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ url_for('admin.static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('admin.static', filename='js/app.min.js') }}"></script>
 {%- block js -%}{%- endblock -%}
 </body>
 
