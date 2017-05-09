@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='flask_backstage',
-      version='0.1',
+      version='0.1.1',
       description='A backstage framework with very few code.',
       author='pengwei',
       author_email='1300896173@qq.com',
       url='https://github.com/huanglong123/flask-backstage',
-      packages=['flask_backstage'],
+      packages=find_packages(),
       license='MIT',
       platforms='any',
       install_requires=[
