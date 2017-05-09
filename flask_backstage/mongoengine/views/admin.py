@@ -10,10 +10,11 @@ frontend = Blueprint('frontend',  # 注册蓝图名称
 """
 
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from ..models import Menu, Role
-from ..forms import MenuForm, RoleForm, LoginForm
+from ..models import Menu, Role, User
+from ..forms import MenuForm, RoleForm, LoginForm, UserForm
 from flask_login import login_required, logout_user, login_user
 from ..utils.helps import admin_create_required
+from .. import bcrypt
 
 admin = Blueprint('admin', __name__, template_folder='../templates', static_folder='../static')
 
@@ -69,7 +70,7 @@ def menu_add():
 	menus = Menu.objects
 	roles = Role.objects
 	form.father.choices = [('无', '无')] + [(m.name, m.name) for m in menus]
-	form.permissions.choices = [('默认权限', 0)] + [(r.name, r.value) for r in roles]
+	form.permissions.choices = [(0, '默认权限')] + [(r.value, r.name) for r in roles]
 	return render_template('admin/menu_add.html', form=form)
 
 
@@ -108,7 +109,7 @@ def menu_edit(mid):
 	form.name.data = menu.name
 	form.father.data = menu.father
 	form.url.data = menu.url
-	form.permissions.choices = [('默认权限', 0)] + [(r.name, r.value) for r in roles]
+	form.permissions.choices = [(0, '默认权限')] + [(r.value, r.name) for r in roles]
 	form.sort.data = menu.sort
 	permissions = ",".join(list(map(str, menu.permissions))) + ","
 
@@ -243,3 +244,109 @@ def role_del(rid):
 		role.delete()
 		flash(u'删除角色成功')
 	return redirect(url_for('admin.role_list'))
+
+
+@admin.route('/user_list', methods=('GET', 'POST'))
+@login_required
+@admin_required
+def user_list():
+	"""
+	用户列表
+	:return:
+	"""
+	users = User.objects
+	return render_template('admin/user_list.html', users=users)
+
+
+@admin.route('/user_add/', methods=('GET', 'POST'))
+@login_required
+@admin_required
+def user_add():
+	"""
+	添加用户
+	:return:
+	"""
+	form = UserForm()
+	roles = Role.objects
+	return render_template('admin/user_add.html', form=form, roles=roles)
+
+
+@admin.route('/user_save/', methods=('GET', 'POST'))
+@login_required
+@admin_required
+def user_save():
+	"""
+	用户保存
+	:return:
+	"""
+	user = User()
+	username = request.form.get('username')
+	password = request.form.get('password')
+	role = request.form.get('role')
+	if username:
+		user.username = username
+	if password:
+		user.password = bcrypt.generate_password_hash(password)
+	if role:
+		user.role = int(role)
+	user.save()
+	return redirect(url_for('admin.user_list'))
+
+
+@admin.route('/user_edit/<string:uid>/', methods=('GET', 'POST'))
+@login_required
+@admin_required
+def user_edit(uid):
+	"""
+	编辑用户
+	:param rid:
+	:return:
+	"""
+	user = User.objects(id=uid).first()
+	roles = Role.objects
+	form = UserForm()
+	form.username.data = user.username
+	return render_template('admin/user_edit.html', form=form, user=user, roles=roles)
+
+
+@admin.route('/user_editsave/', methods=('GET', 'POST'))
+@login_required
+@admin_required
+def user_editsave():
+	"""
+	保存用户编辑
+	:return:
+	"""
+	uid = request.form.get('uid')
+	user = User.objects(id=uid).first()
+	username = request.form.get('username')
+	password = request.form.get('password')
+	role = request.form.get('role')
+	if username:
+		user.username = username
+	if password:
+		user.password = bcrypt.generate_password_hash(password)
+	if role:
+		user.role = int(role)
+	user.save()
+	return redirect(url_for('admin.user_list'))
+
+
+@admin.route('/user_del/<string:uid>/', methods=('GET', 'POST'))
+@login_required
+@admin_required
+def user_del(uid):
+	"""
+	删除用户
+	:param uid:
+	:return:
+	"""
+	user = None
+	if uid:
+		user = User.objects(id=uid).first()
+	if not user:
+		flash(u'对不起，角色不存在或已经删除')
+	else:
+		user.delete()
+		flash(u'删除角色成功')
+	return redirect(url_for('admin.user_list'))

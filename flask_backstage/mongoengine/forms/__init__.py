@@ -22,6 +22,12 @@ class RoleForm(FlaskForm):
 	value = IntegerField('值')
 
 
+class UserForm(FlaskForm):
+	username = StringField('用户名')
+	password = PasswordField('密码')
+	role = SelectField('角色')
+
+
 class LoginForm(FlaskForm):
 	username = StringField('用户名')
 	password = PasswordField('密码')

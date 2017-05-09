@@ -38,7 +38,7 @@
 						<div class="box-header with-border">
 							<h3 class="box-title">编辑菜单</h3>
 						</div>
-						<form class="form" method="post" action="{{ url_for('xadmin.menu_editsave') }}">
+						<form class="form" method="post" action="{{ url_for('admin.menu_editsave') }}">
 							<div>
 								{{ form.hidden_tag() }}
                                 <input name="mid" type="hidden" value="{{ menu.id }}">
@@ -51,7 +51,7 @@
                                 {{ form.permissions.label }}
 								<select class="select-add-tags form-control pmd-select2-tags" multiple>
                                     {% for k, v in form.permissions.choices %}
-                                        <option value="{{ v }}">{{ k }}</option>
+                                        <option value="{{ k }}">{{ v }}</option>
                                     {% endfor %}
                                 </select>
                                 <input type="hidden" value="{{ permissions }}" name="permissions" id="permissions">

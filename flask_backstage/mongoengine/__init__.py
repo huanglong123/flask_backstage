@@ -1,11 +1,14 @@
 # -*- coding:utf-8 -*-
 from flask_mongoengine import MongoEngine
 from flask_bcrypt import Bcrypt
+from flask_wtf.csrf import CSRFProtect
 
-bcrypt = Bcrypt()
-
+#数据库
 db = MongoEngine()
 
+# 安全组件
+csrf = CSRFProtect()
+bcrypt = Bcrypt()
 
 class Admin(object):
 	def __init__(self, app=None):
@@ -13,11 +16,13 @@ class Admin(object):
 			self.init_app(app)
 
 	def init_app(self, app):
-		db.init_app(app)
-		bcrypt.init_app(app)
+		db.init_app(app)  # 数据库
+		# 安全组件
+		csrf.init_app(app)  # 全站开通csrf保护,配置文件需要启用
+		bcrypt.init_app(app)  # 密码加密组件
 		from .views.admin import admin
 		app.register_blueprint(admin, url_prefix='/admin')
-		from .models import Menu, User
+		from .models import Menu, User, Role
 		from flask_login import LoginManager
 		login_manager = LoginManager()
 		login_manager.init_app(app)  # 用于用户的登录，登出和登录访问控制
@@ -30,12 +35,18 @@ class Admin(object):
 
 		from flask_login import current_user
 		admin = User.objects(role=300).first()
+		role = Role.objects(value=300).first()
 		if not admin:
 			user = User()
 			user.username = 'admin'
 			user.password = bcrypt.generate_password_hash('123456')
 			user.role = 300
 			user.save()
+		if not role:
+			role = Role()
+			role.name = '超级管理员'
+			role.value = 300
+			role.save()
 
 		@app.context_processor
 		def menus_list():

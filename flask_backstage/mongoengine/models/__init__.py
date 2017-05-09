@@ -39,3 +39,10 @@ class User(db.DynamicDocument, UserMixin):
 	username = StringField(required=True)
 	password = BinaryField(required=True)
 	role = IntField(required=True)
+
+	def get_role_name(self):
+		r = Role.objects(value=self.role).first()
+		if r:
+			return r.name
+		else:
+			return None

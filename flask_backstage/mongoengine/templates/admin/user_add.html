@@ -1,0 +1,58 @@
+{%- extends "admin/layout.html" -%}
+
+{% block content %}
+	<style type="text/css">
+		a:link {
+			color: #585858;
+			text-decoration: none;
+		}
+		a:visited {
+			text-decoration: none;
+			color: #585858;
+		}
+		a:hover {
+			text-decoration: none;
+			color: #A4A4A4;
+		}
+		a:active {
+			text-decoration: none;
+			color: #A4A4A4;
+		}
+	</style>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Main content -->
+		<section class="content">
+			<!-- Main row -->
+			<div class="row">
+				<!-- Left col -->
+				<section class="col-lg-12 connectedSortable middle">
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">添加用户</h3>
+						</div>
+						<form class="form-horizontal" method="post" action="{{ url_for('admin.user_save') }}">
+							<div class="box-body">
+								{{ form.hidden_tag() }}
+                                {{ form.username.label }}
+								{{ form.username(class="text form-control") }}<br>
+                                {{ form.password.label }}
+								{{ form.password(class="text form-control") }}<br>
+                                <label>角色</label>
+                                <select class="text form-control" id="role" name="role">
+                                    {% for r in roles %}
+                                        <option value="{{ r.value }}">{{ r.name }}</option>
+                                    {% endfor %}
+                                </select>
+							</div>
+							<div class="box-footer">
+								<input class="btn btn-primary" type="submit" name="submit" value="添加用户">
+							</div>
+						</form>
+					</div>
+
+				</section>
+			</div>
+		</section>
+	</div>
+{% endblock %}

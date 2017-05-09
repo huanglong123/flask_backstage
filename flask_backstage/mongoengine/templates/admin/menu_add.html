@@ -53,7 +53,7 @@
                                 {{ form.permissions.label }}
                                 <select class="select-add-tags form-control pmd-select2-tags" multiple>
                                     {% for k, v in form.permissions.choices %}
-                                        <option value="{{ v }}">{{ k }}</option>
+                                        <option value="{{ k }}">{{ v }}</option>
                                     {% endfor %}
                                 </select>
                                 <input type="hidden" value="" name="permissions" id="permissions">
