@@ -20,6 +20,8 @@
 
 	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/skin-blue.min.css') }}">
 
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/backstage.css') }}">
+
 	{%- block css -%}{% endblock %}
 </head>
 
@@ -30,8 +32,8 @@
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="#" class="logo">
-				<span class="logo-mini"><b>A</b>LT</span>
-				<span class="logo-lg"><b>Admin</b>LTE</span>
+				<span class="logo-mini"><b>B</b>S</span>
+				<span class="logo-lg"><b>Back</b>Stage</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -43,11 +45,11 @@
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<span class="hidden-xs">Alexander Pierce</span>
+								<span class="hidden-xs">{{ current_user.username }}</span>
 							</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu" style="min-width: inherit">
 								<li>
-									<a href="#" class="btn btn-default">Sign out</a>
+									<a href="{{ url_for('admin.login_out') }}">退出</a>
 								</li>
 							</ul>
 						</li>
