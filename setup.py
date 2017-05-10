@@ -4,12 +4,13 @@
 from setuptools import setup, find_packages
 
 setup(name='flask_backstage',
-      version='0.1.1',
+      version='0.1.3',
       description='A backstage framework with very few code.',
       author='pengwei',
       author_email='1300896173@qq.com',
       url='https://github.com/huanglong123/flask-backstage',
       packages=find_packages(),
+      include_package_data=True,
       license='MIT',
       platforms='any',
       install_requires=[
