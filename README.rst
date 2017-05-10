@@ -9,6 +9,7 @@ Introduction
 Flask_Backstage 是基于flask的后台管理系统，采用了简洁强大的flask作为web框架，模板引擎用的是Jinja2，数据库用mongodb，前端AdminLTE框架。
 
 依赖
+
 Flask
 Flask-Bcrypt
 Flask-Login
@@ -18,6 +19,7 @@ Flask-WTF
 特性
 
 内置用户管理，菜单管理，角色管理系统
+
 提供类似的Flask Admin的BaseView,BaseModelView,帮助用户快速的开发增删改功能
 
 Installation
