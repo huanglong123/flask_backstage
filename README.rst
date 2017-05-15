@@ -32,7 +32,10 @@ Installation
 Examples
 ------------
 这里有个简单的项目使用案例，你也可以在这个项目的基础上编写自己的项目：https://github.com/huanglong123/flask_backstage_example
-在线演示地址：http://backstage.kbiaoqing.cn/  账号：admin  密码：123456
+
+在线演示地址：http://backstage.kbiaoqing.cn/
+
+账号：admin  密码：123456
 
 
 Documentation
@@ -45,7 +48,9 @@ from flask_backstage import Admin
 app = Flask(__name__)
 
 # 添加csrf保护配置
+
 app.config['WTF_CSRF_ENABLED'] = True
+
 app.config['SECRET_KEY'] = '0\xda\xb3+xAj\x88\x98\x00\x02\xcaR\x9d\xb5QD\x0c\x1aX"\x89{S'
 
 admin = Admin(app)
