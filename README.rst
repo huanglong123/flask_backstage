@@ -30,7 +30,7 @@ Installation
 
 
 Examples
-------------
+--------
 这里有个简单的项目使用案例，你也可以在这个项目的基础上编写自己的项目：https://github.com/huanglong123/flask_backstage_example
 
 在线演示地址：http://backstage.kbiaoqing.cn/
@@ -40,7 +40,7 @@ Examples
 
 Documentation
 -------------
-简单的使用此项目, 你仅仅需要以下的几行代码
+简单的使用此项目, 你仅仅需要以下的几行代码::
 
     from flask import Flask
     from flask_backstage import Admin
