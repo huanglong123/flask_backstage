@@ -57,6 +57,7 @@ Documentation
 
     app.run()
 
+
 然后访问 http://127.0.0.1:5000/admin/
 账号：admin
 密码：123456
