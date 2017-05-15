@@ -58,9 +58,9 @@ class BaseModelView(BaseView):
     column_labels = None  # 对应字段的标题显示，例子dict(title="标题", content="内容", time="发布时间", image='图片')
     name = None  #  所操作的model的名字，例子name='文章'，则前端显示的就是文章列表，添加文章，编辑文章这样的字样
     image_list = []  #  说明那个字段是图片，列表显示的时候就会以图片形式显示，而不是图片路径
-    list_templates = 'xadmin/list.html'  # list模板路径
-    create_templates = 'xadmin/create.html'  # create模板路径
-    edit_templates = 'xadmin/edit.html'  #  edit模板路径
+    list_templates = 'admin/list.html'  # list模板路径
+    create_templates = 'admin/create.html'  # create模板路径
+    edit_templates = 'admin/edit.html'  #  edit模板路径
     can_create = True  #  控制是否有添加功能
     can_edit = True  #  控制是否有编辑功能
     can_delete = True  #  控制是否有删除功能
