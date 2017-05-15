@@ -42,20 +42,20 @@ Documentation
 -------------
 简单的使用此项目, 你仅仅需要以下的几行代码
 
-from flask import Flask
-from flask_backstage import Admin
+    from flask import Flask
+    from flask_backstage import Admin
 
-app = Flask(__name__)
+    app = Flask(__name__)
 
-# 添加csrf保护配置
+    # 添加csrf保护配置
 
-app.config['WTF_CSRF_ENABLED'] = True
+    app.config['WTF_CSRF_ENABLED'] = True
 
-app.config['SECRET_KEY'] = '0\xda\xb3+xAj\x88\x98\x00\x02\xcaR\x9d\xb5QD\x0c\x1aX"\x89{S'
+    app.config['SECRET_KEY'] = '0\xda\xb3+xAj\x88\x98\x00\x02\xcaR\x9d\xb5QD\x0c\x1aX"\x89{S'
 
-admin = Admin(app)
+    admin = Admin(app)
 
-app.run()
+    app.run()
 
 然后访问 http://127.0.0.1:5000/admin/
 账号：admin
