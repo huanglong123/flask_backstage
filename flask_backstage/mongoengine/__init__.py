@@ -16,6 +16,8 @@ class Admin(object):
 			self.init_app(app)
 
 	def init_app(self, app):
+		if app.config.get('SECRET_KEY', None) is None:
+			app.config['SECRET_KEY'] = 'admin'
 		db.init_app(app)  # 数据库
 		# 安全组件
 		csrf.init_app(app)  # 全站开通csrf保护,配置文件需要启用
