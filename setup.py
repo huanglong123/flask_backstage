@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup(name='flask_backstage',
-      version='0.2.1',
+      version='0.2.2',
       description='A backstage framework with very few code.',
       author='pengwei',
       author_email='huanglongtiankong123@gmail.com',
